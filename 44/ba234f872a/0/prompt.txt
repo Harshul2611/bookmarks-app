@@ -1,0 +1,42 @@
+Scaffold a next js 16 App Router with latest stable verison, typescript, tailwind css and shadcn. Use src/app folder structure. Add prisma ORM with postgresql and use supabase auth using @supabase/ssr package.
+fmd
+Ns  ow i will give the folder structure:
+- src/app/(auth)/signup/page.tsx
+- src/app/(auth)/login/page.tsx
+- src/app/dashboard/page.tsx (protected route)
+- src/app/[handle]/page.tsx (public route)
+- src/lib/supabase/client.ts
+- src/lib/prisma.ts (for prisma client)
+- src/lib/supabase/server.ts
+- prisma/schema.prisma
+- src/middleware.ts
+
+
+Now in prisma schema i need 3 models with field:
+- User (id, email, createdAt, updatedAt)
+- Profile (id, userId, handle unique, createdAt, updatedAt)
+- Bookmark (id, userId, title, url, isPublic, createdat, updatedAt)
+
+Also create a .env.local.example with these variable name (no value)
+- DATABASE_URL
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_ANON_KEY
+- RESEND_API_KEY
+- NEXT_PUBLIC_APP_URL
+- SUPABASE_SERVICE_ROLE_KEY
+
+and make sure .env.local is in .gitignore
+
+Right now just scaffold and install dependencies
+
+---
+
+In schema.prisma file, the generator provider should be prisma-client-js not prisma-client and also remove the custom output path.
+
+---
+
+You removed all the models from schema.prisma. Add them back with the correct generator block. The models should be User, profile and Bookmark exactly as before, with prisma-client-js as provider and no custom output path
+
+---
+
+Removes the url line from the database block in schema.prisma as prisma 7 handles database url in prisma.config.ts
