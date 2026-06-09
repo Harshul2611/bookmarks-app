@@ -126,5 +126,8 @@
   }
   html {
     @apply font-sans;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
