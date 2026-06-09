@@ -18,7 +18,9 @@ import {
 
 const HANDLE_REGEX = /^[a-z0-9_]{3,20}$/;
 
-type FieldErrors = Partial<Record<"email" | "handle" | "password" | "form", string>>;
+type FieldErrors = Partial<
+  Record<"email" | "handle" | "password" | "form", string>
+>;
 
 export default function SignupPage() {
   const router = useRouter();
@@ -26,13 +28,18 @@ export default function SignupPage() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [showPassword, setShowPassword] = useState(false);
 
-  function validate(email: string, handle: string, password: string): FieldErrors {
+  function validate(
+    email: string,
+    handle: string,
+    password: string,
+  ): FieldErrors {
     const e: FieldErrors = {};
     if (!email) e.email = "Email is required";
     if (!handle) {
       e.handle = "Handle is required";
     } else if (!HANDLE_REGEX.test(handle)) {
-      e.handle = "3–20 characters: lowercase letters, numbers, and underscores only";
+      e.handle =
+        "3–20 characters: lowercase letters, numbers, and underscores only";
     }
     if (!password) {
       e.password = "Password is required";
@@ -45,9 +52,14 @@ export default function SignupPage() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
-    const handle = (form.elements.namedItem("handle") as HTMLInputElement).value.trim();
-    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+    const email = (
+      form.elements.namedItem("email") as HTMLInputElement
+    ).value.trim();
+    const handle = (
+      form.elements.namedItem("handle") as HTMLInputElement
+    ).value.trim();
+    const password = (form.elements.namedItem("password") as HTMLInputElement)
+      .value;
 
     const fieldErrors = validate(email, handle, password);
     if (Object.keys(fieldErrors).length > 0) {
@@ -143,13 +155,16 @@ export default function SignupPage() {
                 <p className="text-xs text-destructive">{errors.handle}</p>
               ) : (
                 <p className="text-xs text-muted-foreground">
-                  3–20 chars · letters, numbers, underscores
+                  3–20 chars · lowercase letters, numbers, underscores
                 </p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-[0.85rem] font-semibold">
+              <Label
+                htmlFor="password"
+                className="text-[0.85rem] font-semibold"
+              >
                 Password
               </Label>
               <div className="relative">
