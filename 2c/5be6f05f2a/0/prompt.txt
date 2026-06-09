@@ -1,0 +1,114 @@
+Build a signup and login page using supabase auth
+
+In signup page (src/app/(auth)/signup/page.tsx):
+- Use fields like email, password, handle(@username)
+- then do validation like it have 3-20 chars, lowercase letters, numbers, underscores only
+- When we submit the form then call supabase signup, then insert a row into profile table via prisma then send a welcome email via Resend
+- After signup redirect to /dashboard
+- and in signup page use a link to redirect to login page
+
+In Login page (src/app/(auth)/login/page.tsx):
+- Use fields like email and password
+- When we submit the form then call supabase signin with password
+- After login, redirect user to /dashboard
+- and in login page also, use a link to redirect to signup page
+
+For API Routes use:
+- POST /api/auth/signup: handle signup logic + create profile in DB + send Resend email
+- POST /api/auth/login: handle login logic
+
+Now UI requirements are:
+- Use shadcn/ui components that needed
+- Use clean, minimal and light design with white background
+- Don't use dark colors
+- Show toast message when user is successfully signup or login
+- Show loading state on submit button
+- Show error message inline
+
+---
+
+I am using prisma 7 version and i getting error as "Using engine type "client" requires either "adapter" or "accelerateUrl"" when i click in create account button. The error is in src/lib/prisma.ts
+
+---
+
+Update the global typography in the app and for that install "Inter" from next/font/google, Apply it in src/app/layout.tsx as default font and lastly increase the font size slightly not too much and use font-bold or font-medium or font-semibold where needed so fonts looks good
+
+---
+
+In login and signup page at src/app/(auth)/login/page.tsx and src/app/(auth)/signup/page.tsx
+
+1. Add a show/hide password toggle on the password field with eye icon using lucide react and the toggle button should be sit inside the input field on the right side.
+
+2. Add cursor-pointer to all buttons and links. Add cursor-not-allowed and opacity-50 when button is in loading state or disabled.
+
+---
+
+Create bookmark CRUD API routes only with no UI changes right now.
+
+Files that we create are:
+- src/app/api/bookmarks/route.ts
+- src/app/api/bookmarks/[id]/route.ts
+
+
+In src/app/api/bookmarks/route.ts: 
+- GET API: get current user from supabase session, then fetch all bookmarks for that logged in user using there userId using prisma and return them as JSON
+- POST API: get current user from supabase session, read title, url, isPublic from request body, validate that title and url are not empty, create bookmarks using prisma where userId = logged in user id, and return created bookmarks as JSON.
+
+In src/app/api/bookmarks/[id]/route.ts:
+- PATCH: get current user from supabase session, find bookmark by id in prisma, then verify bookmark.userId === logged in user id(return 403 if not), update only the fields provided and at last return updated bookmark
+- DELETE: get current user from supabase sesion, find bookmark by id in prisma, then verify bookmark.userId === logged in userId (return 403 if not), delete it and return 200 status code.
+
+Security rules that need to check
+- If no session found then return 401 unauthorized
+- Never trust userId from request body, always use session 
+- Always verify ownership before any request
+
+Do not modify any existing files
+
+---
+
+Build the dashboard page UI only, API routes already exist.
+
+Files to create:
+- src/app/dashboard/page.tsx — server component
+- src/components/bookmarks/bookmark-list.tsx — client component that manages all state
+- src/components/bookmarks/bookmark-modal.tsx — add/edit modal
+- src/components/bookmarks/bookmark-card.tsx — single bookmark card
+
+src/app/dashboard/page.tsx (server component):
+- Get current user from Supabase session, if no session redirect to /login
+- Fetch initial bookmarks by calling GET /api/bookmarks
+- Get user handle from Prisma profile WHERE userId = current user id
+- Pass initial bookmarks and handle to bookmark-list client component
+- Show logout button that calls Supabase signOut and redirects to /login
+
+bookmark-list.tsx (client component):
+- Accept initialBookmarks as prop, store in useState
+- Show "Add Bookmark" button that opens add modal
+- Render bookmark-card for each bookmark
+- After POST: append new bookmark to state array
+- After PATCH: find bookmark by id in state and replace it
+- After DELETE: filter out deleted bookmark from state by id
+- No full page refresh, all updates must be instant via state
+
+bookmark-card.tsx:
+- Show title, URL as clickable link (opens in new tab)
+- Show public/private badge using shadcn Badge
+- Edit button opens bookmark-modal with existing values prefilled
+- Delete button shows shadcn AlertDialog confirmation before deleting
+- Call PATCH /api/bookmarks/[id] for edit
+- Call DELETE /api/bookmarks/[id] for delete
+- On success call onEdit and onDelete callbacks passed from parent
+
+bookmark-modal.tsx:
+- Accept mode (add or edit) and existing bookmark data as props
+- Fields: title (required), url (required), isPublic toggle (default false)
+- On add: POST to /api/bookmarks, on success call onAdd callback
+- On edit: PATCH to /api/bookmarks/[id], on success call onEdit callback
+- Show loading state on submit button
+
+UI requirements:
+- Clean minimal light design, white background, no dark colors
+- cursor-pointer on all clickable elements
+- Empty state message when no bookmarks exist: "No bookmarks yet. Add your first one!"
+- Use lucide react for icons and shadcn for components like Card, Button etc
