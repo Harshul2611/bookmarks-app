@@ -34,27 +34,29 @@ export default async function HandlePage({ params }: Props) {
           </p>
         ) : (
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {bookmarks.map((bookmark) => (
-              <Card key={bookmark.id} className="flex flex-col">
-                <CardContent className="flex flex-1 flex-col gap-3 p-4">
-                  <h3 className="line-clamp-2 text-[0.9rem] font-semibold leading-snug">
-                    {bookmark.title}
-                  </h3>
+            {bookmarks.map(
+              (bookmark: { id: string; title: string; url: string }) => (
+                <Card key={bookmark.id} className="flex flex-col">
+                  <CardContent className="flex flex-1 flex-col gap-3 p-4">
+                    <h3 className="line-clamp-2 text-[0.9rem] font-semibold leading-snug">
+                      {bookmark.title}
+                    </h3>
 
-                  <a
-                    href={bookmark.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex cursor-pointer items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-                  >
-                    <ExternalLink className="size-3 shrink-0" />
-                    <span className="truncate underline-offset-2 group-hover:underline">
-                      {bookmark.url}
-                    </span>
-                  </a>
-                </CardContent>
-              </Card>
-            ))}
+                    <a
+                      href={bookmark.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex cursor-pointer items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+                    >
+                      <ExternalLink className="size-3 shrink-0" />
+                      <span className="truncate underline-offset-2 group-hover:underline">
+                        {bookmark.url}
+                      </span>
+                    </a>
+                  </CardContent>
+                </Card>
+              ),
+            )}
           </div>
         )}
       </main>
