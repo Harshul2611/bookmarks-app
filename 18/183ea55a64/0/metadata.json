@@ -1,0 +1,53 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "18183ea55a64",
+  "session_id": "29ee7f5f-da8d-4910-8ed8-aa0e9450252d",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-10T11:19:14.198302Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "src/lib/prisma.ts"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "6ee4eb0dfc1c",
+  "token_usage": {
+    "input_tokens": 28,
+    "cache_creation_tokens": 33963,
+    "cache_read_tokens": 549606,
+    "output_tokens": 7479,
+    "api_call_count": 14
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-10T11:19:14.192835Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 17,
+    "total_committed": 0,
+    "total_lines_changed": 17,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 23,
+      "user_lines_removed": 17,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".claude/settings.local.json": 14,
+        "src/lib/prisma.ts": 9
+      },
+      "user_removed_per_file": {
+        "src/lib/prisma.ts": 17
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Getting error 'Unknown file extension .wasm' for Prisma 7 in Next.js. We are using @prisma/adapter-pg. Fix src/lib/prisma.ts and next.config.ts to handle Prisma 7 WASM files correctly in Next.js 16.
