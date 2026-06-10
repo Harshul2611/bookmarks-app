@@ -1,0 +1,37 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "7cc83d88ff33",
+  "session_id": "c0ba3a0d-a1fa-4c60-b857-bb24e1739ad8",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-10T11:10:01.162032Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "src/lib/prisma.ts"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "264d39dcdfc7",
+  "token_usage": {
+    "input_tokens": 282,
+    "cache_creation_tokens": 147166,
+    "cache_read_tokens": 6387206,
+    "output_tokens": 86926,
+    "api_call_count": 83
+  },
+  "session_metrics": {
+    "turn_count": 6
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-10T11:10:01.136693Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 10,
+    "human_modified": 8,
+    "human_removed": 0,
+    "total_committed": 10,
+    "total_lines_changed": 18,
+    "agent_percentage": 0,
+    "metric_version": 2
+  }
+}
