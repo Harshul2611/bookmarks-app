@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "07ebefb2eaf9",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "src/app/api/auth/signup/route.ts"
+  ],
+  "sessions": [
+    {
+      "metadata": "/07/ebefb2eaf9/0/metadata.json",
+      "transcript": "/07/ebefb2eaf9/0/full.jsonl",
+      "content_hash": "/07/ebefb2eaf9/0/content_hash.txt",
+      "prompt": "/07/ebefb2eaf9/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 70,
+    "cache_creation_tokens": 60768,
+    "cache_read_tokens": 1574669,
+    "output_tokens": 9504,
+    "api_call_count": 35
+  }
+}

@@ -1,0 +1,45 @@
+Build the public profile page UI only.
+
+Files need to be created or modify:
+- src/app/[handle]/page.tsx
+
+src/app/[handle]/page.tsx
+- Find the profile by using handle name in prisma
+- If handle not exist then return 404 page
+- Get the userId from that profile
+- Fetch all bookmarks for that handle where userId=that userId from profile and isPublic=true
+- User's handle name should be display at top
+- List all bookmarks In cards
+- Each cards shows title, url which is clickable and opens in new tab
+- If user has no public bookmark then show empty state message
+- No edit/delete buttons as this is public view only
+- If handle not found then return not Found page
+
+UI requirements:
+- Clean minimal light design, white background, no dark colors
+- Use shadcn Card component for bookmark cards
+- Use lucide-react ExternalLink icon next to each URL
+- cursor-pointer on all clickable elements
+
+This is a server component, no authentication required.
+Use src/lib/prisma.ts for all database queries.
+Do not modify any other files.
+
+---
+
+Update src/app/page.tsx with a simple landing page.
+- Clean minimal light design, white background
+- App name "Bookmarks App" as heading
+- Subtitle: "Save and share your favourite links"
+- Two buttons side by side: "Get Started" links to /signup, "Log In" links to /login
+- Centered layout, vertically and horizontally centered on screen
+- No dark colors
+- Do not modify any other files
+
+---
+
+In src/app/page.tsx the shadcn Button component doesn't support asChild prop — getting TypeScript error 'Property asChild does not exist'. Fix both buttons so they work as Next.js Link components without using asChild or render prop
+
+---
+
+The welcome email via Resend is not being sent on signup. Check src/app/api/auth/signup/route.ts and verify the Resend email sending code is correct and actually being called after successful user creation. The RESEND_API_KEY environment variable is set. Fix any issues found.
