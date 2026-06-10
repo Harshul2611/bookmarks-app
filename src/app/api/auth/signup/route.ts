@@ -10,7 +10,10 @@ const HANDLE_REGEX = /^[a-z0-9_]{3,20}$/;
 export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null);
   if (!body) {
-    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request body" },
+      { status: 400 },
+    );
   }
 
   const { email, password, handle } = body as {
@@ -20,7 +23,10 @@ export async function POST(request: NextRequest) {
   };
 
   if (!email || !password || !handle) {
-    return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "All fields are required" },
+      { status: 400 },
+    );
   }
 
   if (!HANDLE_REGEX.test(handle)) {
@@ -30,15 +36,17 @@ export async function POST(request: NextRequest) {
           "Handle must be 3–20 characters: lowercase letters, numbers, and underscores only",
         field: "handle",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
-  const existingProfile = await prisma.profile.findUnique({ where: { handle } });
+  const existingProfile = await prisma.profile.findUnique({
+    where: { handle },
+  });
   if (existingProfile) {
     return NextResponse.json(
       { error: "This handle is already taken", field: "handle" },
-      { status: 409 }
+      { status: 409 },
     );
   }
 
@@ -60,7 +68,7 @@ export async function POST(request: NextRequest) {
           cookiesToSet.forEach((c) => pendingCookies.push(c));
         },
       },
-    }
+    },
   );
 
   const { data, error: signUpError } = await supabase.auth.signUp({
@@ -87,13 +95,13 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json(
       { error: "Failed to create user profile" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 
   resend.emails
     .send({
-      from: "Bookmark App <onboarding@resend.dev>",
+      from: "Bookmark App <noreply@streamlyx.in>",
       to: email,
       subject: "Welcome to Bookmark App!",
       html: `<p>Hi <strong>@${handle}</strong>,</p><p>Your Bookmark App account is ready. Start saving your favourite links!</p>`,
