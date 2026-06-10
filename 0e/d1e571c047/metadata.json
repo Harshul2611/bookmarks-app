@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "0ed1e571c047",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "src/app/dashboard/page.tsx"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0e/d1e571c047/0/metadata.json",
+      "transcript": "/0e/d1e571c047/0/full.jsonl",
+      "content_hash": "/0e/d1e571c047/0/content_hash.txt",
+      "prompt": "/0e/d1e571c047/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 282,
+    "cache_creation_tokens": 147166,
+    "cache_read_tokens": 6387206,
+    "output_tokens": 86926,
+    "api_call_count": 83
+  }
+}
