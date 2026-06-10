@@ -24,7 +24,7 @@ export default async function DashboardPage() {
   ]);
 
   // Serialize Dates to strings for the client component boundary
-  const bookmarks = bookmarksRaw.map((b) => ({
+  const bookmarks = bookmarksRaw.map((b: (typeof bookmarksRaw)[0]) => ({
     ...b,
     createdAt: b.createdAt.toISOString(),
     updatedAt: b.updatedAt.toISOString(),
